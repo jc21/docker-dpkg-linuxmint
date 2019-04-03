@@ -5,7 +5,7 @@ pipeline {
   }
   agent any
   environment {
-    IMAGE      = "dpkg-mint"
+    IMAGE      = "dpkg-linuxmint"
     TEMP_IMAGE = "${IMAGE}_${BUILD_NUMBER}"
     TAG        = "19"
     TAG2       = "latest"
