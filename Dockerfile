@@ -1,25 +1,19 @@
-FROM linuxmintd/mint19-amd64
+FROM jc21/dpkg-mint:latest
 
 MAINTAINER Jamie Curnow <jc@jc21.com>
 LABEL maintainer="Jamie Curnow <jc@jc21.com>"
 
-# Apt
-RUN apt-get update \
-  && apt-get install -y wget make devscripts build-essential git curl automake autoconf expect sudo apt-utils reprepro
+USER root
 
-# Remove requiretty from sudoers main file
-RUN sed -i '/Defaults    requiretty/c\#Defaults    requiretty' /etc/sudoers
+RUN wget "http://ftp.us.debian.org/debian/pool/main/g/golang-1.12/golang-1.12_1.12.5-1_all.deb" -O /tmp/golang-1.12_1.12.5-1_all.deb \
+ && wget "http://ftp.us.debian.org/debian/pool/main/g/golang-1.12/golang-1.12-src_1.12.5-1_amd64.deb" -O /tmp/golang-1.12-src_1.12.5-1_amd64.deb \
+ && wget "http://ftp.us.debian.org/debian/pool/main/g/golang-1.12/golang-1.12-go_1.12.5-1_amd64.deb" -O /tmp/golang-1.12-go_1.12.5-1_amd64.deb \
+ && wget "http://ftp.us.debian.org/debian/pool/main/g/golang-1.12/golang-1.12-doc_1.12.5-1_all.deb" -O /tmp/golang-1.12-doc_1.12.5-1_all.deb \
+ && dpkg -i /tmp/golang-1.12_1.12.5-1_all.deb /tmp/golang-1.12-src_1.12.5-1_amd64.deb /tmp/golang-1.12-go_1.12.5-1_amd64.deb /tmp/golang-1.12-doc_1.12.5-1_all.deb \
+ && rm -f /tmp/*.deb
 
-# Rpm User
-RUN useradd -G sudo builder \
-    && mkdir -p /home/builder \
-    && chmod -R 777 /home/builder
-
-# Sudo
-ADD etc/sudoers.d/builder /etc/sudoers.d/
-RUN chown root:root /etc/sudoers.d/*
+# installed in /usr/lib/go-1.12
+ENV GOROOT=/usr/lib/go-1.12
+ENV PATH="/usr/lib/go-1.12/bin:${PATH}"
 
 USER builder
-
-WORKDIR /home/builder
-

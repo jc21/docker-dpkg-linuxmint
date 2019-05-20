@@ -7,8 +7,8 @@ pipeline {
   environment {
     IMAGE      = "dpkg-mint"
     TEMP_IMAGE = "${IMAGE}_${BUILD_NUMBER}"
-    TAG        = "19"
-    TAG2       = "latest"
+    TAG        = "19-golang"
+    TAG2       = "latest-golang"
   }
   stages {
     stage('Build') {
