@@ -42,6 +42,7 @@ pipeline {
   post {
     success {
       build job: 'Docker/docker-dpkg-linuxmint/golang', wait: false
+      build job: 'Docker/docker-dpkg-linuxmint/rust', wait: false
       juxtapose event: 'success'
       sh 'figlet "SUCCESS"'
     }
