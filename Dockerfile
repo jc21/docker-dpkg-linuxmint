@@ -1,4 +1,4 @@
-FROM jc21/dpkg-linuxmint:latest
+FROM jc21/dpkg-mint:latest
 
 MAINTAINER Jamie Curnow <jc@jc21.com>
 LABEL maintainer="Jamie Curnow <jc@jc21.com>"
