@@ -7,8 +7,8 @@ pipeline {
   environment {
     IMAGE      = "dpkg-mint"
     TEMP_IMAGE = "${IMAGE}_${BUILD_NUMBER}"
-    TAG        = "19"
-    TAG2       = "latest"
+    TAG        = "19-rust"
+    TAG2       = "latest-rust"
   }
   stages {
     stage('Build') {
@@ -41,8 +41,6 @@ pipeline {
   }
   post {
     success {
-      build job: 'Docker/docker-dpkg-linuxmint/golang', wait: false
-      build job: 'Docker/docker-dpkg-linuxmint/rust', wait: false
       juxtapose event: 'success'
       sh 'figlet "SUCCESS"'
     }
