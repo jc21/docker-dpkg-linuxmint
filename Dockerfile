@@ -4,7 +4,10 @@ MAINTAINER Jamie Curnow <jc@jc21.com>
 LABEL maintainer="Jamie Curnow <jc@jc21.com>"
 
 # Apt
-RUN apt-get update \
+RUN apt-get update && apt-get upgrade -y \
+  && apt-get update && apt-get upgrade -y \
+  && apt-get update && apt-get upgrade -y \
+  && apt-get autoremove -y \
   && apt-get install -y wget make devscripts build-essential git curl automake autoconf expect sudo apt-utils reprepro jq zip
 
 # Remove requiretty from sudoers main file
