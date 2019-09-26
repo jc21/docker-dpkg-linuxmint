@@ -7,8 +7,8 @@ LABEL maintainer="Jamie Curnow <jc@jc21.com>"
 RUN apt-get update && apt-get upgrade -y \
   && apt-get update && apt-get upgrade -y \
   && apt-get update && apt-get upgrade -y \
-  && apt-get remove -y *icon-theme* *gtk* \
-  && apt-get autoremove -y \
+  && apt-get remove -y --allow-remove-essential *icon-theme* *gtk* \
+  && apt-get autoremove -y --allow-remove-essential \
   && apt-get install -y wget make devscripts build-essential git curl automake autoconf expect sudo apt-utils reprepro jq zip
 
 # Remove requiretty from sudoers main file
